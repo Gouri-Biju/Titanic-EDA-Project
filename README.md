@@ -22,7 +22,7 @@ Outputs:
 Machine Learning Model
 
 Built a Logistic Regression model to predict survival:
-- Accuracy: ~78-85%
+- Accuracy: 83%
 - Evaluated using precision, recall, f1-score
 - Features: age, class, sex, fare, etc.
 
