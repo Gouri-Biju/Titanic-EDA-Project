@@ -19,5 +19,14 @@ Outputs:
 - Visual insights (survival rates by group)
 - Ready for ML modeling
 
+Machine Learning Model
+
+Built a Logistic Regression model to predict survival:
+- Accuracy: ~78-85%
+- Evaluated using precision, recall, f1-score
+- Features: age, class, sex, fare, etc.
+
+Notebook: [`Titanic_ML_Model.ipynb`](./Titanic_ML_Model.ipynb)
+
 
 This is part of my data science portfolio. More to come!
