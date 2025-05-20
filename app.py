@@ -36,8 +36,8 @@ with col1:
 
 with col2:
     age = st.slider("🎂 Age", 0, 80, 25)
-    sibsp = st.number_input("🧍‍🤝‍🧍 Siblings/Spouses aboard", 0, 10, 0)
-    parch = st.number_input("👨‍👩‍👧 Parents/Children aboard", 0, 10, 0)
+    sibsp = st.number_input("🧍‍🤝‍🧍 Siblings/Spouses", 0, 10, 0)
+    parch = st.number_input("👨‍👩‍👧 Parents/Children", 0, 10, 0)
 
 # Derived features
 pclass_str = {1: "First", 2: "Second", 3: "Third"}[pclass]
@@ -67,7 +67,7 @@ input_dict = {
 input_df = pd.DataFrame([input_dict])[features]
 
 # Predict Button
-if st.button("🔍 Predict Survival"):
+if st.button("🔍 Predict "):
     with st.spinner("Analyzing passenger data..."):
         progress = st.progress(0)
         for i in range(100):
