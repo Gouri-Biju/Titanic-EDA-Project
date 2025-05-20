@@ -16,7 +16,6 @@ st.sidebar.info(
     """
     This app predicts whether a passenger would survive the Titanic disaster based on their information.
     
-    - Built with **Streamlit**
     - Powered by **Machine Learning**
     """
 )
@@ -36,8 +35,8 @@ with col1:
 
 with col2:
     age = st.slider("🎂 Age", 0, 80, 25)
-    sibsp = st.number_input("🧍‍🤝‍🧍 Siblings/Spouses", 0, 10, 0)
-    parch = st.number_input("👨‍👩‍👧 Parents/Children", 0, 10, 0)
+    sibsp = st.number_input("🧍‍🤝‍🧍 Siblings/Spouses aboard", 0, 10, 0)
+    parch = st.number_input("👨‍👩‍👧 Parents/Children aboard", 0, 10, 0)
 
 # Derived features
 pclass_str = {1: "First", 2: "Second", 3: "Third"}[pclass]
@@ -67,14 +66,13 @@ input_dict = {
 input_df = pd.DataFrame([input_dict])[features]
 
 # Predict Button
-if st.button("🔍 Predict "):
+if st.button("🔍 Predict Survival"):
     with st.spinner("Analyzing passenger data..."):
         progress = st.progress(0)
         for i in range(100):
-            time.sleep(0.7)
+            time.sleep(0.01)
             progress.progress(i + 1)
 
     prediction = model.predict(input_df)[0]
     result_text = "✅ **Survived**" if prediction == 1 else "❌ **Did not survive**"
     st.markdown(f"### 🎯 Prediction Result: {result_text}")
-
