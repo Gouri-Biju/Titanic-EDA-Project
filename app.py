@@ -70,7 +70,7 @@ if st.button("🔍 Predict Survival"):
     with st.spinner("Analyzing passenger data..."):
         progress = st.progress(0)
         for i in range(100):
-            time.sleep(0.7)
+            time.sleep(0.079)
             progress.progress(i + 1)
 
     prediction = model.predict(input_df)[0]
