@@ -50,7 +50,7 @@ if st.button("Predict"):
     with st.spinner("🔍 Analyzing and processing data..."):
         progress = st.progress(0)
         for percent_complete in range(100):
-            time.sleep(0.2)  # Simulate work being done
+            time.sleep(0.07)  # Simulate work being done
             progress.progress(percent_complete + 1)
     
     prediction = model.predict(input_df)[0]
