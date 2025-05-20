@@ -1,6 +1,7 @@
 import streamlit as st
 import joblib
 import pandas as pd
+import time  # Add this for simulating processing time
 
 # Load model and features
 model = joblib.load('titanic_model.pkl')
@@ -16,6 +17,8 @@ parch = st.number_input("Parents/Children aboard", 0, 10, 0)
 fare = st.number_input("Fare Paid", 0.0, 600.0, 50.0)
 sex = st.selectbox("Sex", ["male", "female"])
 embarked = st.selectbox("Port of Embarkation", ["S", "C", "Q"])
+
+# Derived features
 pclass_str = {1: "First", 2: "Second", 3: "Third"}[pclass]
 who = "man" if sex == "male" else "woman"
 adult_male = 1 if sex == "male" and age >= 18 else 0
@@ -43,5 +46,12 @@ input_dict = {
 input_df = pd.DataFrame([input_dict])[features]
 
 if st.button("Predict"):
+    # Show progress bar
+    with st.spinner("🔍 Analyzing and processing data..."):
+        progress = st.progress(0)
+        for percent_complete in range(100):
+            time.sleep(0.015)  # Simulate work being done
+            progress.progress(percent_complete + 1)
+    
     prediction = model.predict(input_df)[0]
     st.success("✅ Survived" if prediction == 1 else "❌ Did not survive")
