@@ -72,7 +72,7 @@ if st.button("🔍 Predict Survival"):
         for i in range(100):
             time.sleep(0.079)
             progress.progress(i + 1)
-            time.sleep(1)
+        time.sleep(1)
 
     prediction = model.predict(input_df)[0]
     result_text = "✅ **Survived**" if prediction == 1 else "❌ **Did not survive**"
