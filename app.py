@@ -91,5 +91,3 @@ if st.button("🔍 Predict "):
     - **Embarked**: {embarked}
     - **Alone**: {"Yes" if alone else "No"}
     """)
-
-    st.balloons()  # Add celebratory effect
