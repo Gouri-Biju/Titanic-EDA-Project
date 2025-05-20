@@ -1,21 +1,45 @@
 import streamlit as st
 import joblib
 import pandas as pd
+import time
 
 # Load model and features
 model = joblib.load('titanic_model.pkl')
 features = joblib.load('feature_names.pkl')
 
-st.title("🚢 Titanic Survival Prediction")
+# Page Configuration
+st.set_page_config(page_title="Titanic Survival Predictor", page_icon="🚢", layout="centered")
 
-# User input
-pclass = st.selectbox("Passenger Class", [1, 2, 3])
-age = st.slider("Age", 0, 80, 25)
-sibsp = st.number_input("Siblings/Spouses aboard", 0, 10, 0)
-parch = st.number_input("Parents/Children aboard", 0, 10, 0)
-fare = st.number_input("Fare Paid", 0.0, 600.0, 50.0)
-sex = st.selectbox("Sex", ["male", "female"])
-embarked = st.selectbox("Port of Embarkation", ["S", "C", "Q"])
+# Sidebar
+st.sidebar.title("📋 About")
+st.sidebar.info(
+    """
+    This app predicts whether a passenger would survive the Titanic disaster based on their information.
+    
+    - Built with **Streamlit**
+    - Powered by **Machine Learning**
+    """
+)
+st.sidebar.markdown("💡 Tip: Adjust the inputs and click **Predict** to see the result!")
+
+# Title
+st.title("🚢 Titanic Survival Prediction App")
+
+# Create layout with columns for better alignment
+col1, col2 = st.columns(2)
+
+with col1:
+    pclass = st.selectbox("🎫 Passenger Class", [1, 2, 3])
+    sex = st.selectbox("👤 Sex", ["male", "female"])
+    embarked = st.selectbox("🛳️ Port of Embarkation", ["S", "C", "Q"])
+    fare = st.number_input("💰 Fare Paid", 0.0, 600.0, 50.0)
+
+with col2:
+    age = st.slider("🎂 Age", 0, 80, 25)
+    sibsp = st.number_input("🧍‍🤝‍🧍 Siblings/Spouses", 0, 10, 0)
+    parch = st.number_input("👨‍👩‍👧 Parents/Children", 0, 10, 0)
+
+# Derived features
 pclass_str = {1: "First", 2: "Second", 3: "Third"}[pclass]
 who = "man" if sex == "male" else "woman"
 adult_male = 1 if sex == "male" and age >= 18 else 0
@@ -42,6 +66,15 @@ input_dict = {
 # Convert to DataFrame
 input_df = pd.DataFrame([input_dict])[features]
 
-if st.button("Predict"):
+# Predict Button
+if st.button("🔍 Predict "):
+    with st.spinner("Analyzing passenger data..."):
+        progress = st.progress(0)
+        for i in range(100):
+            time.sleep(0.7)
+            progress.progress(i + 1)
+
     prediction = model.predict(input_df)[0]
-    st.success("✅ Survived" if prediction == 1 else "❌ Did not survive")
+    result_text = "✅ **Survived**" if prediction == 1 else "❌ **Did not survive**"
+    st.markdown(f"### 🎯 Prediction Result: {result_text}")
+
